@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ch9-2使用CSS製作多層級選單(2) - AI增強版</title>
+    <style>
+        /* 基本頁面與字型設定 */
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+            padding: 30px;
+            background-color: #f4f7f6;
+        }
+
+        /* 清除預設清單樣式 */
+        ul.menu, ul.menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 選單項目基本設定 */
+        ul.menu li {
+            position: relative; /* 作為子選單絕對定位的基準點 */
+            width: 160px;
+            background-color: #3b82f6; /* 主背景色：亮藍色 */
+            border: 2px solid #1d4ed8; /* [增修] 選單框線採2px的同背景加深色系（深藍色） */
+            border-radius: 5%; /* [增修] 設定選單能有5%圓角 */
+            margin-bottom: 4px; /* 讓主選單項目間保有微幅間距，圓角更明顯 */
+            box-sizing: border-box; /* [新增] 確保2px框線包含在寬度內，避免排版錯位 */
+            transition: background-color 0.2s ease;
+        }
+
+        /* 滑鼠懸停時的背景色變化 */
+        ul.menu li:hover {
+            background-color: #2563eb;
+        }
+
+        /* 選單超連結樣式 */
+        ul.menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* 第一層主選單橫向排列 */
+        ul.menu > li {
+            float: left;
+            margin-right: 8px; /* 主選單項目之間的水平間距 */
+        }
+
+        /* 第二層與第三層子選單預設隱藏與定位 */
+        ul.menu ul {
+            display: none;
+            position: absolute;
+            z-index: 100;
+        }
+
+        /* [增修] 第二層子選單：在對應第一層上層選單之右下方各5%處開始顯示 */
+        ul.menu > li > ul {
+            top: 105%; /* [增修] 距離上層選單頂部105%（即下方5%處） */
+            left: 5%;  /* [增修] 距離上層選單左側5%（即向右偏移5%處） */
+        }
+
+        /* [增修] 第三層子選單：在對應第二層上層選單之右下方各5%處開始顯示 */
+        ul.menu ul ul {
+            top: 105%; /* [增修] 距離上層子選單頂部105%（即下方5%處） */
+            left: 5%;  /* [增修] 距離上層子選單左側5%（即向右偏移5%處） */
+        }
+
+        /* 第二層子選單獨立配色（藍綠色系） */
+        ul.menu > li > ul > li {
+            background-color: #0d9488; /* 次背景色：藍綠色 */
+            border: 2px solid #115e59; /* [增修] 採2px的同背景加深色系（深藍綠色） */
+            border-radius: 5%; /* [增修] 維持5%圓角設定 */
+        }
+
+        ul.menu > li > ul > li:hover {
+            background-color: #0f766e;
+        }
+
+        /* 第三層子選單獨立配色（琥珀橘色系） */
+        ul.menu ul ul li {
+            background-color: #d97706; /* 第三層背景色：琥珀橘 */
+            border: 2px solid #92400e; /* [增修] 採2px的同背景加深色系（深咖啡橘） */
+            border-radius: 5%; /* [增修] 維持5%圓角設定 */
+        }
+
+        ul.menu ul ul li:hover {
+            background-color: #b45309;
+        }
+
+        /* 滑鼠移入上層選單時顯示下一層子選單 */
+        ul.menu li:hover > ul {
+            display: block;
+        }
+
+        /* 清除浮動 */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>ch9-2使用CSS製作多層級選單(2)</h2>
+
+    <ul class="menu clearfix">
+        <li>
+            <a href="#">台北景點</a>
+            <ul>
+                <li><a href="#">台北101</a></li>
+                <li><a href="#">迪化街</a></li>
+                <li><a href="#">士林夜市</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">澎湖景點</a>
+            <ul>
+                <li><a href="#">跨海大橋</a></li>
+                <li><a href="#">沙灘</a></li>
+                <li><a href="#">觀音亭</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">台南景點</a>
+            <ul>
+                <li><a href="#">赤崁樓</a></li>
+                <li><a href="#">台南孔廟</a></li>
+                <li>
+                    <a href="#">台南小吃&gt;&gt;</a>
+                    <ul>
+                        <li><a href="#">八寶冰</a></li>
+                        <li><a href="#">蚵仔煎</a></li>
+                        <li><a href="#">米糕</a></li>
+                        <li><a href="#">牛肉湯</a></li>
+                        <li><a href="#">肉燥飯</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</body>
+</html>
